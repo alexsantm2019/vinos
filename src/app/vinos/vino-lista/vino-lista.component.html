@@ -1,0 +1,41 @@
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous"
+/>
+<div class="container-fluid">
+  <span class="text-center">
+    <h1>Lista de vinos</h1>
+  </span>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <label>Buscar vino:</label>
+        <input
+          name="searchBox"
+          [(ngModel)]="searchString"
+          class="form-control"
+          placeholder="Digite el nombre de un vino"
+          (keyup)="search()"
+        />
+
+        <h2 class="text-success text-center">
+          Hemos encontrado {{ (vinos$ | async)?.length }} vinos!
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let vino of vinos$ | async" style="display: inline-block">
+    <div
+      class="card p-2 m-2 text-white"
+      style="width: 18rem"
+      [ngClass]="vino.isOnSale ? 'bg-success' : 'bg-danger'"
+    >
+      <app-vino-item [vino]="vino" (quantityInCart)="onQuantityChange($event)">
+      </app-vino-item>
+    </div>
+  </div>
+</div>

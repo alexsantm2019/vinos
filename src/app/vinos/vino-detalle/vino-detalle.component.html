@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+
+<div class="container">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <a href="javascript:void(0)" (click)="goBack()">Back</a>
+            <div class="card">
+
+
+                <div class="card-header text-center text-white" [ngClass]="vino.isOnSale ? 'bg-success' : 'bg-danger' ">{{ vino.name}}</div>
+
+                <div class="card-body">
+
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <img class="card-img-top  text-center" src="{{vino.imageUrl}}" width="15" alt="vino" />
+                        </div>
+                        <div class="col-lg-6  align-self-center">
+                            <p class="h3 card-text text-center">{{ vino.price| number : '1.2-2' | currency:'EUR'}}</p>
+
+                            <p class="h4 text-center">Disponible: {{ vino.quantityInCart }}</p><br>
+                        </div>
+                    </div>
+
+                    <table class="table table-hover table-bordered table-responsive-xl" *ngIf="vino.foodPairing != null">
+                        <thead>
+                            <th> Maridan con </th>
+                            <th> Glutten </th>
+                            <th> Kcal </th>
+                            <th> Vegan </th>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let data of vino.foodPairing">
+                                <td> {{data.name}} </td>
+                                <td> {{data.glutten ? 'Yes' : 'No'}} </td>
+                                <td> {{data.kcal}} </td>
+                                <td> {{data.vegan? 'Yes' : 'No'}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

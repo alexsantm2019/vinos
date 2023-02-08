@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+<div class="container-fluid">
+    <span class="text-center">
+    <img
+      class="card-img-top"
+      src="{{vino.imageUrl}}"
+      (click)="goToWineDetail(vino.id)"
+      width="175"
+      alt="Wine"
+    />
+    <div class="card-body">
+      <h5 class="card-title text-center">{{ vino.name}}</h5>
+      <p class="card-text text-center">{{ vino.price | number : '1.2-2' | currency:'EUR'}}</p>
+
+      <button  class="btn btn-light btn-sm" *ngIf="vino.quantityInCart > 0" (click)="decrementInCart()">
+        -
+      </button>
+
+      <span class="mx-2">{{ vino.quantityInCart }}</span>
+
+    <button class="btn btn-light btn-sm" (click)="incrementInCart()">+</button>
+</div>
+</span>
+</div>

@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<div class="container mt-4 mb-4">
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+            <h3 class="text-center">Ingreso de nuevo vino</h3>
+            <h4 class="text-info text-center">{{message}}</h4>
+            <form [formGroup]="vino" (ngSubmit)="createvino()">
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre:</label>
+                    <input type="text" maxlength="25" required class="form-control" id="name" name="name" aria-describedby="name" placeholder="Ingrese nombre del vino" formControlName="name">
+
+                    <div *ngIf="f['name']?.touched && f['name']?.invalid" class="alert alert-danger">
+                        <div *ngIf="f['name'].errors?.['required']">vino name is required</div>
+                        <div *ngIf="f['name'].errors?.['wrongWineName']">vino name is invalid..!!</div>
+                    </div>
+                    <small class="text-success" *ngIf="f['name'].valid">Correct</small>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Precio:</label>
+                    <input type="number" min="0" required (keypress)="onlyNumber($event)" class="form-control" id="price" name="price" placeholder="Ingrese el precio del vino" formControlName="price">
+
+                    <div *ngIf="f['price']?.touched && f['price']?.invalid" class="alert alert-danger">
+                        <div *ngIf="f['price'].errors?.['required']">vino price is required</div>
+                        <div *ngIf="f['price'].errors?.['min']">vino price must be minimun $1</div>
+                    </div>
+                    <small class="text-success" *ngIf="f['price'].valid">Correct</small>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Imagen url:</label>
+                    <input type="text" required class="form-control" id="imageUrl" name="imageUrl" placeholder="Ingrese la imagen url del vino" formControlName="imageUrl">
+
+                    <div *ngIf="f['imageUrl']?.touched && f['imageUrl']?.invalid" class="alert alert-danger">
+                        <div *ngIf="f['imageUrl'].errors?.['required']">vino Image URL is required</div>
+                        <div *ngIf="f['imageUrl'].errors?.['pattern']">vino Image URL does not seem to be a valid URL</div>
+                    </div>
+                    <small class="text-success" *ngIf="f['imageUrl'].valid">Correct</small>
+
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="isOnSale" formControlName="isOnSale">
+                    <label class="form-check-label" for="exampleCheck1">En venta</label>
+                </div>
+
+                <button type="submit" blocked class=" btn-block mt-2 btn btn-success">Crear</button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
